@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Book = require('../lib/models/Book');
 
 describe('books routes', () => {
   beforeEach(() => {
@@ -20,6 +21,15 @@ describe('books routes', () => {
       title: 'All the Light We Cannot See',
       released: 2014,
     });
+  });
+
+  it('POST - should add new book', async () => {
+    const book = new Book({
+      title: 'The Da Vinci Code',
+      released: 2003,
+    });
+    const res = await request(app).post('/books').send(book);
+    expect(res.body.released).toEqual(book.released);
   });
 
   afterAll(() => {
