@@ -29,6 +29,7 @@ describe('books routes', () => {
       released: 2003,
     });
     const res = await request(app).post('/books').send(book);
+    expect(res.body.title).toEqual(book.title);
     expect(res.body.released).toEqual(book.released);
   });
 

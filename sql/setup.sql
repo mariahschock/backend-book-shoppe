@@ -1,7 +1,8 @@
 -- Use this file to define your SQL tables
 -- The SQL in this file will be executed when you run `npm run setup-db`
-DROP TABLE IF EXISTS books;
-DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS authors CASCADE;
+DROP TABLE IF EXISTS books_authors CASCADE;
 
 CREATE TABLE books (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -14,6 +15,14 @@ CREATE TABLE authors (
   author_name VARCHAR NOT NULL,
   dob DATE,
   pob VARCHAR NOT NULL
+);
+
+CREATE TABLE books_authors (
+  id BIGINT GENERATED ALWAYS AS IDENTITY,
+  book_id INT,
+  author_id INT,
+  foreign key (book_id) REFERENCES books(id),
+  foreign key (author_id) REFERENCES authors(id)
 );
 
 INSERT INTO books (
@@ -37,12 +46,22 @@ VALUES
 )
 VALUES
   ('Anthony Doerr', '1973-10-27', 'Cleveland, Ohio'),
-  ('Anthony Doerr', '1973-10-27', 'Cleveland, Ohio'),
   ('V. E. Schwab', '1987-07-07', 'California'),
   ('Garth Stein', '1964-12-06', 'Los Angeles, California'),
-  ('Donna Tartt', '1963-12-23', 'Greenwood, Mississippi'),
   ('Donna Tartt', '1963-12-23', 'Greenwood, Mississippi'),
   ('F. Scott Fitzgerald', '1896-09-24', 'Saint Paul, Minnesota'),
   ('John Steinbeck', '1902-02-27', 'Salinas, California');
 
-
+INSERT INTO books_authors (
+  author_id,
+  book_id
+)
+VALUES
+  ('1', '1'),
+  ('1', '2'),
+  ('2', '3'),
+  ('3', '4'),
+  ('4', '5'),
+  ('4', '6'),
+  ('5', '7'),
+  ('6', '8');
