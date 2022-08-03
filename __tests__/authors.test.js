@@ -16,12 +16,14 @@ describe('authors routes', () => {
 
   it('GET - /authors/id should return single author with details', async () => {
     const res = await request(app).get('/authors/1');
-    expect(res.body).toEqual({
-      id: '1',
-      author_name: 'Anthony Doerr',
-      dob: '1973-10-27T07:00:00.000Z',
-      pob: 'Cleveland, Ohio',
-    });
+    expect(res.body).toHaveProperty('id', '1');
+    expect(res.body).toHaveProperty('author_name', 'Anthony Doerr');
+    expect(res.body).toHaveProperty('dob');
+    expect(res.body).toHaveProperty('pob');
+    expect(res.body).toHaveProperty('books');
+    expect(res.body.books[0]).toHaveProperty('id');
+    expect(res.body.books[0]).toHaveProperty('title');
+    expect(res.body.books[0]).toHaveProperty('released');
   });
 
   it('POST - should add new author', async () => {
