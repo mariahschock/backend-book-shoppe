@@ -16,11 +16,14 @@ describe('books routes', () => {
   
   it('GET - should return single book with details', async () => {
     const res = await request(app).get('/books/1');
-    expect(res.body).toEqual({
-      id: '1',
-      title: 'All the Light We Cannot See',
-      released: 2014,
-    });
+    expect(res.body).toHaveProperty('id', '1');
+    expect(res.body).toHaveProperty('title', 'All the Light We Cannot See');
+    expect(res.body).toHaveProperty('released', 2014);
+    expect(res.body).toHaveProperty('authors');
+    expect(res.body.authors[0]).toHaveProperty('dob');
+    expect(res.body.authors[0]).toHaveProperty('pob');
+    expect(res.body.authors[0]).toHaveProperty('id');
+    expect(res.body.authors[0]).toHaveProperty('author_name');
   });
 
   it('POST - should add new book', async () => {
