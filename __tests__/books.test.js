@@ -8,9 +8,18 @@ describe('books routes', () => {
     return setup(pool);
   });
 
-  it('should return a list of books with release dates', async () => {
+  it('GET - should return a list of books with release dates', async () => {
     const res = await request(app).get('/books');
     expect(res.body.length).toEqual(8);
+  });
+  
+  it('GET - should return single book with details', async () => {
+    const res = await request(app).get('/books/1');
+    expect(res.body).toEqual({
+      id: '1',
+      title: 'All the Light We Cannot See',
+      released: 2014,
+    });
   });
 
   afterAll(() => {
