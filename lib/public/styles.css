@@ -1,0 +1,33 @@
+body {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0
+}
+.divs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+h1 {
+    margin: 0;
+    padding: 20px;
+    font-size: 3rem;
+    background-color: rgba(205, 146, 75, 0.544);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+h2 {
+    margin: 20px;
+    padding: 10px;
+}
+.list, .details, .post {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid rgba(205, 146, 75, 0.544);
+    background-color: rgba(205, 147, 75, 0.249);
+    border-radius: 15px;
+    width: 275px;
+}
