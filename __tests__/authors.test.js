@@ -13,4 +13,18 @@ describe('authors routes', () => {
     const res = await request(app).get('/authors');
     expect(res.body.length).toEqual(8);
   });
+
+  it('GET - /authors/id should return single author with details', async () => {
+    const res = await request(app).get('/authors/1');
+    expect(res.body).toEqual({
+      id: '1',
+      author_name: 'Anthony Doerr',
+      dob: '1973-10-27T07:00:00.000Z',
+      pob: 'Cleveland, Ohio',
+    });
+  });
+
+  afterAll(() => {
+    pool.end();
+  });
 });
